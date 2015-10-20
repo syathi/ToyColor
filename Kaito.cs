@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class Kaito :AbstractButtleParameter{
-
 	// Use this for initialization
 	void Start () {
 		NAME = "カイト";
@@ -16,9 +15,10 @@ public class Kaito :AbstractButtleParameter{
 		hp = MAX_HP;
 		MAX_MP = 150;
 		mp = MAX_MP;
+		color = new int[2];
 		color[0] = 0; //とりあえず無色
 		color[1] = 0;
-		UnityEngine.Debug.Log("attack:"+attack +" defense:" + defense + " magic_atk:" + magic_atk + " hp:"+ hp + " mp:" + mp + " color:" + color[0] + color[1]);
+		UnityEngine.Debug.Log(NAME + ": attack:"+attack +" defense:" + defense + " magic_atk:" + magic_atk + " hp:"+ hp + " mp:" + mp + " color:" + color[0] + color[1]);
 	}
 	
 	// Update is called once per frame

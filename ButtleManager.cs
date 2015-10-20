@@ -7,7 +7,7 @@ public class ButtleManager : MonoBehaviour {
 	Kaito kaito;
 	Tokage tokage;
 	string kaitoName, tokageName;
-	int checkWoL;
+	int checkWoL, loopCnt = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,11 +16,14 @@ public class ButtleManager : MonoBehaviour {
 		tokage = tokageObj.GetComponent<Tokage>();
 		kaito = kaitoObj.GetComponent<Kaito>();
 
-		UnityEngine.Debug.Log(tokage.NAME + "が現れた! コマンド? ");
+		//UnityEngine.Debug.Log(tokage +" : "+ tokage.attack + " : " + tokage.defense + " : " + tokage.NAME);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(loopCnt == 0){
+			UnityEngine.Debug.Log(tokage.NAME + "が現れた! コマンド? ");
+		}
 		if(Input.GetKey(KeyCode.Space)){
 			myTurn();
 			checkWoL = checkWinOrLoss();
@@ -28,6 +31,7 @@ public class ButtleManager : MonoBehaviour {
 			checkWoL = checkWinOrLoss();
 
 		}
+		loopCnt = 1;
 	}
 
 	/*
@@ -43,7 +47,7 @@ public class ButtleManager : MonoBehaviour {
 	*/
 	public void enemyTurn(){
 		int act = (int)(Random.value * 10);
-		if(act < 8){
+		if(act < 9){
 			doAttack(tokage, kaito);
 		}
 		else {
@@ -62,6 +66,7 @@ public class ButtleManager : MonoBehaviour {
 		int magnification = computeMag(attack_man, damage_man);
 		double randnum = Random.Range(0.8f, 1.0f);
 		int damage = (int)((attack_man.attack - damage_man.defense) * magnification * randnum);
+		UnityEngine.Debug.Log("(" + attack_man.attack + "-" + damage_man.defense + ") * "+ magnification + " * " + randnum);
 		damage_man.hp -= damage;
 		UnityEngine.Debug.Log (attack_man.NAME + "の攻撃！");
 		UnityEngine.Debug.Log(damage_man.NAME + "は" + damage + "のダメージを受けた!");
@@ -99,7 +104,7 @@ public class ButtleManager : MonoBehaviour {
 		//}
 		for(int i = 0; i < 2; i++){
 			for(int k = 0; k < 2; k++){
-				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 0 && attack_man.color[k] == 1 )){//
+				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 3 && attack_man.color[k] == 1 )){//
 					magnification *= 2;
 				}
 			}
