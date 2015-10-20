@@ -25,8 +25,10 @@ public class AbstractButtleParameter : MonoBehaviour {
 	public int hp;
 	public int MAX_MP;
 	public int mp;
-	public int color1; //0,1,2,3
-	public int color2; //0,1,2,3
+	public int[] color = new int[2]; //0,1,2,3
+	color[0] = 0;
+	color[1] = 1;
+	//public int color2; //0,1,2,3
 	protected bool[] crown = new bool[28];//王冠28種類。それぞれの値から内容を取り出して実装
 
 	//buttle commands

@@ -86,20 +86,31 @@ public class ButtleManager : MonoBehaviour {
 
 
 	/*
-	computeMag:相性の倍率計算をする
+	computeMag:相性の倍率計算をする。
+	
 	attack_man:攻撃側
 	damage_man:攻撃される側
 	*/
 	public int computeMag(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){
 		int magnification = 1;
-//		if (attack_man.color1 == 0 || damage_man.color1 == 0) {
-//			return magnification;
-//		}
+
+		//if (attack_man.color[0] == 0 || damage_man.color[0] == 0) {
+		//	return magnification;
+		//}
+		for(int i = 0; i < 2; i++){
+			for(int k = 0; k < 2; k++){
+				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 0 && attack_man.color[k] == 1 )){//
+					magnification *= 2;
+				}
+			}
+		}
 		return magnification;
 	}
 
 	/*
 	checkWinOrLoss:勝敗判定をするメソッド
+	勝敗判定によってお金なくすとかの処理をしたり、王冠貰う処理に以降する。
+	又は全てこのメソッドで行い、フィールド画面に遷移する処理までする
 	*/
 	public int checkWinOrLoss(){
 		int result = 0;//0は勝敗が決まっていない状態
@@ -117,7 +128,9 @@ public class ButtleManager : MonoBehaviour {
 	}
 
 	/*
-	selectEnemy:攻撃の対象にする敵を選ぶメソッド
+	selectEnemy:攻撃の対象にする敵を選ぶメソッド。
+	相手が一人の時は実行しなくていい（と思う）
+	敵が攻撃するときはランダムに攻撃するようにする(enemyTurnで実装するかも)
 	*/
 	//public AbstractButtleParameter selectEnemy(){}
 
