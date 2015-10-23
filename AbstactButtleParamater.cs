@@ -3,8 +3,12 @@ using System.Collections;
 
 public class AbstractButtleParameter : MonoBehaviour {
 
+	public Animator animator;
+	public int attackAnimeId;
+
 	// Use this for initialization
 	void Start () {
+
 	
 	}
 	
@@ -36,7 +40,9 @@ public class AbstractButtleParameter : MonoBehaviour {
 	 attack_man:自分。攻撃力とかを参照する
 	 damage_man:相手。防御力とかHPとかを参照する
 	*/
-	protected void doAttack(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){}
+	protected void doAttack(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){
+
+	}
 	
 	protected void doDefense(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){}
 	

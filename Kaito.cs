@@ -2,8 +2,29 @@ using UnityEngine;
 using System.Collections;
 
 public class Kaito :AbstractButtleParameter{
+
+	GameObject manager;
+	ButtleManager buttleManager;
 	// Use this for initialization
 	void Start () {
+		manager = GameObject.Find("Wall");
+		buttleManager = manager.GetComponent<ButtleManager>();
+
+		setParam();
+		setAnimator();
+
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if(buttleManager.attackFlag){
+			animator.SetBool(attackAnimeId, true);
+			buttleManager.attackFlag = false;
+		}
+	}
+
+	void setParam(){
 		NAME = "カイト";
 		MAX_ATK = 110;
 		attack = MAX_ATK;
@@ -19,11 +40,12 @@ public class Kaito :AbstractButtleParameter{
 		color[0] = 0; //とりあえず無色
 		color[1] = 0;
 		UnityEngine.Debug.Log(NAME + ": attack:"+attack +" defense:" + defense + " magic_atk:" + magic_atk + " hp:"+ hp + " mp:" + mp + " color:" + color[0] + color[1]);
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void setAnimator(){
+		animator = GetComponent<Animator> ();
+		attackAnimeId = Animator.StringToHash("attackAnime");
 	}
 
 }

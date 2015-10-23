@@ -6,6 +6,7 @@ public class ButtleManager : MonoBehaviour {
 	GameObject tokageObj;
 	Kaito kaito;
 	Tokage tokage;
+	public bool attackFlag;
 	string kaitoName, tokageName;
 	int checkWoL, loopCnt = 0;
 	
@@ -24,7 +25,7 @@ public class ButtleManager : MonoBehaviour {
 		if(loopCnt == 0){
 			UnityEngine.Debug.Log(tokage.NAME + "が現れた! コマンド? ");
 		}
-		if(Input.GetKey(KeyCode.Space)){
+		if(Input.GetKeyUp(KeyCode.Space)){
 			myTurn();
 			checkWoL = checkWinOrLoss();
 			enemyTurn();
@@ -63,6 +64,7 @@ public class ButtleManager : MonoBehaviour {
 	damage_man:攻撃される側
 	*/
 	public void doAttack(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){
+		attackFlag = true;
 		int magnification = computeMag(attack_man, damage_man);
 		double randnum = Random.Range(0.8f, 1.0f);
 		int damage = (int)((attack_man.attack - damage_man.defense) * magnification * randnum);
@@ -107,6 +109,7 @@ public class ButtleManager : MonoBehaviour {
 				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 3 && attack_man.color[k] == 1 )){//
 					magnification *= 2;
 				}
+				if(magnification <= 4)break;
 			}
 		}
 		return magnification;
