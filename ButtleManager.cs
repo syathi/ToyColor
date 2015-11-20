@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ButtleManager : MonoBehaviour {
@@ -64,11 +64,13 @@ public class ButtleManager : MonoBehaviour {
 	damage_man:攻撃される側
 	*/
 	public void doAttack(AbstractButtleParameter attack_man, AbstractButtleParameter damage_man){
-		attackFlag = true;
+		attackFlag = true;//アニメーション用フラグ
 		int magnification = computeMag(attack_man, damage_man);
 		double randnum = Random.Range(0.8f, 1.0f);
 		int damage = (int)((attack_man.attack - damage_man.defense) * magnification * randnum);
-		UnityEngine.Debug.Log("(" + attack_man.attack + "-" + damage_man.defense + ") * "+ magnification + " * " + randnum);
+		
+		//UnityEngine.Debug.Log("(" + attack_man.attack + "-" + damage_man.defense + ") * "+ magnification + " * " + randnum);
+		
 		damage_man.hp -= damage;
 		UnityEngine.Debug.Log (attack_man.NAME + "の攻撃！");
 		UnityEngine.Debug.Log(damage_man.NAME + "は" + damage + "のダメージを受けた!");
@@ -106,10 +108,10 @@ public class ButtleManager : MonoBehaviour {
 		//}
 		for(int i = 0; i < 2; i++){
 			for(int k = 0; k < 2; k++){
-				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 3 && attack_man.color[k] == 1 )){//
+				if(damage_man.color[i] - attack_man.color[k] == 1 || (damage_man.color[i] == 3 && attack_man.color[k] == 1 )){
 					magnification *= 2;
 				}
-				if(magnification <= 4)break;
+				if(magnification <= 4)break;//倍率4倍まで制限
 			}
 		}
 		return magnification;

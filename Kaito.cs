@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Kaito :AbstractButtleParameter{
 
-	GameObject manager;
+	Animator cameraAnimator, enemyAnimator;
 	ButtleManager buttleManager;
+	public int cameraId;
+	Camera camera;
 	// Use this for initialization
 	void Start () {
-		manager = GameObject.Find("Wall");
-		buttleManager = manager.GetComponent<ButtleManager>();
+		buttleManager = GameObject.Find("ButtleManager").GetComponent<ButtleManager>();
 
 		setParam();
 		setAnimator();
@@ -18,7 +19,7 @@ public class Kaito :AbstractButtleParameter{
 	
 	// Update is called once per frame
 	void Update () {
-		if(buttleManager.attackFlag){
+		if(buttleManager.attackFlag){//Buttlemanagerから攻撃フラグ取得sるう
 			animator.SetBool(attackAnimeId, true);
 			buttleManager.attackFlag = false;
 		}
@@ -46,6 +47,16 @@ public class Kaito :AbstractButtleParameter{
 	void setAnimator(){
 		animator = GetComponent<Animator> ();
 		attackAnimeId = Animator.StringToHash("attackAnime");
+		//cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
+		//enemyAnimator = GameObject.Find("Enemy").GetComponent<Animator>();
+		//cameraId = animator.StringToHash("shake");
+
 	}
+
+	/*void test(){
+		UnityEngine.Debug.Log ("jikken");
+		cameraAnimator.SetTrigger("shake");
+		enemyAnimator.SetTrigger("damaged");
+	}*/
 
 }
